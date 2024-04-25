@@ -4,5 +4,8 @@
     <string name="Abautme">About me</string>
     <string name="Detail">Detail</string>
     <string name="Name">Name :</string>
+    <string name="location">location :</string>
+    <string name="cariusername"> Cari Username :</string>
+    <string name="cari"> Cari </string>
 
 </resources>

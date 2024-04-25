@@ -3,7 +3,9 @@ package com.example.utsdikiaulio.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Detail_user extends AppCompatActivity {
+    private ProgressBar loding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,30 +33,28 @@ public class Detail_user extends AppCompatActivity {
             ApiService apiService = ApiConfig.getApiService();
             Call<UserResponse> userCall = apiService.getUser(username);
 
-            TextView textView = findViewById(R.id.tvName);
-            TextView textView2 = findViewById(R.id.tvUsername);
-            TextView textView3 = findViewById(R.id.tvAboutme);
-            ImageView imageView = findViewById(R.id.foto);
+            loding = findViewById(R.id.loding);
+            TextView tvnama = findViewById(R.id.tvName);
+            TextView tvusername = findViewById(R.id.tvUsername);
+            TextView tvAboutme = findViewById(R.id.tvAboutme);
+            TextView tvLocation = findViewById(R.id.tvlocation);
+            ImageView foto = findViewById(R.id.foto);
 
-
+            showLoading(true);
             userCall.enqueue(new Callback<UserResponse>() {
                 @Override
                 public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                     if (response.isSuccessful()) {
-
                         UserResponse user = response.body();
                         if (user != null) {
-                            String name = "Name: " + user.getName();
-                            String usernames = "Username: " + user.getUsername();
-                            String bio = "Bio: " + user.getBio();
-                            String gambar = user.getfoto();
-
-                            textView.setText(name);
-                            textView2.setText(usernames);
-                            textView3.setText(bio);
-                            Picasso.get().load(gambar).into(imageView);
+                            showLoading(false);
+                            tvnama.setText(user.getName());
+                            tvusername.setText(user.getUsername());
+                            tvAboutme.setText(user.getBio());
+                            tvLocation.setText(user.getLocation());
+                            Picasso.get().load(user.getfoto()).into(foto);
                         } else {
-                            Toast.makeText(Detail_user.this, "Failed to get user data", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Detail_user.this, "Gagal!!!, Data tidak ada", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -63,6 +64,13 @@ public class Detail_user extends AppCompatActivity {
                     Toast.makeText(Detail_user.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+        }
+    }
+    private void showLoading(Boolean isLoading) {
+        if (isLoading) {
+            loding.setVisibility(View.VISIBLE);
+        } else {
+            loding.setVisibility(View.GONE);
         }
     }
 

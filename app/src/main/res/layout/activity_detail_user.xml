@@ -116,4 +116,28 @@
         android:textColor="@color/black"
         />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/location"
+        android:textSize="23sp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/tvlocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Diki Aulio Fransisko"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        />
+    <ProgressBar
+        android:id="@+id/loding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
 </LinearLayout>
