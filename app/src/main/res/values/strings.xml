@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">UTSDikiAulio</string>
+    <string name="Profile">Profile</string>
+    <string name="Abautme">About me</string>
+    <string name="Detail">Detail</string>
+    <string name="Name">Name :</string>
+
+</resources>
